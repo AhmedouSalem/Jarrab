@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jarrab/core/routing/app_router.dart';
 import 'package:jarrab/features/home/presentation/widgets/category_grid.dart';
 import 'package:jarrab/features/home/presentation/widgets/featured_quiz_carousel.dart';
 import 'package:jarrab/features/home/presentation/widgets/home_header.dart';
@@ -13,11 +15,13 @@ class HomePage extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final featured = <FeaturedQuizUI>[
       FeaturedQuizUI(
+        quizId: "1",
         title: l10n.homeFeaturedQuiz1Title,
         subtitle: l10n.homeFeaturedQuiz1Subtitle,
         imageAsset: null,
       ),
       FeaturedQuizUI(
+        quizId: "2",
         title: l10n.homeFeaturedQuiz2Title,
         subtitle: l10n.homeFeaturedQuiz2Subtitle,
         imageAsset: null,
@@ -99,7 +103,8 @@ class HomePage extends StatelessWidget {
               title: l10n.homeFeaturedQuizzes,
               items: featured,
               onStartQuiz: (quiz) {
-                // UI-only pour l’instant
+                context.push(Routes.quizPath(quiz.quizId));
+                print("go to quiz page");
               },
             ),
           ),

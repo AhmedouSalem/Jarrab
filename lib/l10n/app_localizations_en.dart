@@ -144,4 +144,49 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String quizQuestionProgress(Object current, Object total) {
+    return 'Question $current of $total';
+  }
+
+  @override
+  String quizTimeRemaining(Object seconds) {
+    return 'Time remaining: ${seconds}s';
+  }
+
+  @override
+  String get quizNextQuestion => 'Next Question';
+
+  @override
+  String get resultsTitle => 'Results';
+
+  @override
+  String get resultsYourScore => 'YOUR SCORE';
+
+  @override
+  String get resultsEncouragement => 'Excellent work! Keep it up!';
+
+  @override
+  String get resultsPerformanceOverview => 'Performance Overview';
+
+  @override
+  String get resultsCorrectAnswers => 'Correct Answers';
+
+  @override
+  String get resultsIncorrectAnswers => 'Incorrect Answers';
+
+  @override
+  String get resultsRetryQuiz => 'Retry Quiz';
+
+  @override
+  String get resultsShareResults => 'Share Results';
+
+  @override
+  String get resultsShareComingSoon => 'Sharing is coming soon.';
+
+  @override
+  String resultsScoreSlash(Object total) {
+    return '/$total';
+  }
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jarrab/core/config/app_router.dart';
+import 'package:jarrab/core/routing/app_router.dart';
 import 'package:jarrab/core/constant/app_image_asset.dart';
 import 'package:jarrab/features/splash/presentation/widgets/gradient_progress_bar.dart';
 

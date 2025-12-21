@@ -1,4 +1,4 @@
-import 'package:jarrab/core/config/routes.dart';
+import 'package:jarrab/core/routing/routes.dart';
 
 final session = AuthSession();
 final router = buildRouter(session);

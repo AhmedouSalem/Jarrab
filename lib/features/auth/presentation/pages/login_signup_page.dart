@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jarrab/features/auth/presentation/form/auth_form_state.dart';
 import 'package:jarrab/core/ui/responsive.dart';
 import 'package:jarrab/features/auth/presentation/widgets/auth_background.dart';
-import 'package:jarrab/shared/widgets/app_logo.dart';
+import 'package:jarrab/core/ui/shared/widgets/app_logo.dart';
 import 'package:jarrab/features/auth/presentation/widgets/auth_tabs.dart';
 import 'package:jarrab/features/auth/presentation/widgets/gradient_button.dart';
 import 'package:jarrab/features/auth/presentation/widgets/labeled_field.dart';

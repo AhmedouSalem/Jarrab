@@ -40,6 +40,19 @@
   "navLeaderboard": "الترتيب",
   "navProfile": "الملف الشخصي",
   "navSettings": "الاعدادات",
-    "catAcademia" : "أكاديميا",
-    "catInnovations": "اختراع"
+  "catAcademia": "أكاديميا",
+  "catInnovations": "اختراع",
+  "quizQuestionProgress": "السؤال {current} من {total}",
+  "quizTimeRemaining": "الوقت المتبقي: {seconds}ث",
+  "quizNextQuestion": "السؤال التالي",
+  "resultsTitle": "النتائج",
+  "resultsYourScore": "نتيجتك",
+  "resultsEncouragement": "عمل رائع! استمر!",
+  "resultsPerformanceOverview": "ملخص الأداء",
+  "resultsCorrectAnswers": "إجابات صحيحة",
+  "resultsIncorrectAnswers": "إجابات خاطئة",
+  "resultsRetryQuiz": "أعد المحاولة",
+  "resultsShareResults": "شارك النتائج",
+  "resultsShareComingSoon": "ميزة المشاركة قريبًا.",
+  "resultsScoreSlash": "/{total}"
 }

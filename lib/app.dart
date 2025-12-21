@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jarrab/core/utils/util.dart';
 import 'package:jarrab/l10n/app_localizations.dart';
-import 'core/theme/app_theme.dart';
+import 'core/ui/theme/app_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key, required this.router});

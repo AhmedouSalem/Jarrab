@@ -143,4 +143,49 @@ class AppLocalizationsAr extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String quizQuestionProgress(Object current, Object total) {
+    return 'السؤال $current من $total';
+  }
+
+  @override
+  String quizTimeRemaining(Object seconds) {
+    return 'الوقت المتبقي: $secondsث';
+  }
+
+  @override
+  String get quizNextQuestion => 'السؤال التالي';
+
+  @override
+  String get resultsTitle => 'النتائج';
+
+  @override
+  String get resultsYourScore => 'نتيجتك';
+
+  @override
+  String get resultsEncouragement => 'عمل رائع! استمر!';
+
+  @override
+  String get resultsPerformanceOverview => 'ملخص الأداء';
+
+  @override
+  String get resultsCorrectAnswers => 'إجابات صحيحة';
+
+  @override
+  String get resultsIncorrectAnswers => 'إجابات خاطئة';
+
+  @override
+  String get resultsRetryQuiz => 'أعد المحاولة';
+
+  @override
+  String get resultsShareResults => 'شارك النتائج';
+
+  @override
+  String get resultsShareComingSoon => 'ميزة المشاركة قريبًا.';
+
+  @override
+  String resultsScoreSlash(Object total) {
+    return '/$total';
+  }
 }

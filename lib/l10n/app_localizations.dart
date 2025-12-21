@@ -351,6 +351,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =0{0 questions} =1{1 question} other{{count} questions}}'**
   String homeQuestionsCount(num count);
+
+  /// No description provided for @quizQuestionProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {current} of {total}'**
+  String quizQuestionProgress(Object current, Object total);
+
+  /// No description provided for @quizTimeRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Time remaining: {seconds}s'**
+  String quizTimeRemaining(Object seconds);
+
+  /// No description provided for @quizNextQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Question'**
+  String get quizNextQuestion;
+
+  /// No description provided for @resultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Results'**
+  String get resultsTitle;
+
+  /// No description provided for @resultsYourScore.
+  ///
+  /// In en, this message translates to:
+  /// **'YOUR SCORE'**
+  String get resultsYourScore;
+
+  /// No description provided for @resultsEncouragement.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent work! Keep it up!'**
+  String get resultsEncouragement;
+
+  /// No description provided for @resultsPerformanceOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Overview'**
+  String get resultsPerformanceOverview;
+
+  /// No description provided for @resultsCorrectAnswers.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct Answers'**
+  String get resultsCorrectAnswers;
+
+  /// No description provided for @resultsIncorrectAnswers.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect Answers'**
+  String get resultsIncorrectAnswers;
+
+  /// No description provided for @resultsRetryQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry Quiz'**
+  String get resultsRetryQuiz;
+
+  /// No description provided for @resultsShareResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Results'**
+  String get resultsShareResults;
+
+  /// No description provided for @resultsShareComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing is coming soon.'**
+  String get resultsShareComingSoon;
+
+  /// No description provided for @resultsScoreSlash.
+  ///
+  /// In en, this message translates to:
+  /// **'/{total}'**
+  String resultsScoreSlash(Object total);
 }
 
 class _AppLocalizationsDelegate

@@ -3,11 +3,13 @@ import 'featured_quiz_card.dart';
 
 class FeaturedQuizUI {
   const FeaturedQuizUI({
+    required this.quizId,
     required this.title,
     required this.subtitle,
     required this.imageAsset,
   });
 
+  final String quizId;
   final String title;
   final String subtitle;
   final String? imageAsset;

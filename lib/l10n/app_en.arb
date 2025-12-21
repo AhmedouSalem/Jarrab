@@ -39,7 +39,20 @@
     "catChemistry": "Chemistry",
     "catGeography": "Geography",
     "catPsychology": "Psychology",
-    "catAcademia" : "Academia",
+    "catAcademia": "Academia",
     "catInnovations": "Innovations",
-    "homeQuestionsCount": "{count, plural, =0{0 questions} =1{1 question} other{{count} questions}}"
+    "homeQuestionsCount": "{count, plural, =0{0 questions} =1{1 question} other{{count} questions}}",
+    "quizQuestionProgress": "Question {current} of {total}",
+    "quizTimeRemaining": "Time remaining: {seconds}s",
+    "quizNextQuestion": "Next Question",
+    "resultsTitle": "Results",
+    "resultsYourScore": "YOUR SCORE",
+    "resultsEncouragement": "Excellent work! Keep it up!",
+    "resultsPerformanceOverview": "Performance Overview",
+    "resultsCorrectAnswers": "Correct Answers",
+    "resultsIncorrectAnswers": "Incorrect Answers",
+    "resultsRetryQuiz": "Retry Quiz",
+    "resultsShareResults": "Share Results",
+    "resultsShareComingSoon": "Sharing is coming soon.",
+    "resultsScoreSlash": "/{total}"
 }

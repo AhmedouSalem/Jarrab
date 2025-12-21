@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jarrab/shared/widgets/app_logo.dart';
+import 'package:jarrab/core/ui/shared/widgets/app_logo.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({

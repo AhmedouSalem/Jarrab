@@ -1,60 +1,95 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "===================================="
-echo "📁 STRUCTURE DU DOSSIER lib/"
-echo "===================================="
-find lib -maxdepth 4 -type d | sed 's|[^/]*/|  |g'
+ROOT="${1:-lib}"
 
-echo ""
-echo "===================================="
-echo "🚪 POINT D’ENTRÉE"
-echo "===================================="
-ls -1 lib/main.dart lib/app.dart 2>/dev/null
+if [[ ! -d "$ROOT" ]]; then
+  echo "❌ Dossier introuvable: $ROOT"
+  exit 1
+fi
 
-echo ""
-echo "===================================="
-echo "🧭 ROUTING"
-echo "===================================="
-find lib -maxdepth 3 -type f \( -name "*router*.dart" -o -name "*routes*.dart" \)
+# Ignore generated files (adapter si besoin)
+IGNORE_REGEX='(\.g\.dart$|\.freezed\.dart$|\.gen\.dart$|\.mocks\.dart$|/\.dart_tool/|/build/)'
 
-echo ""
-echo "===================================="
-echo "🎨 THEME & UI CORE"
-echo "===================================="
-find lib/core -type f \( -name "*theme*.dart" -o -name "*responsive*.dart" -o -name "*layout*.dart" \)
+print_header() {
+  echo
+  echo "===================================="
+  echo "$1"
+  echo "===================================="
+}
 
-echo ""
-echo "===================================="
-echo "🌍 INTERNATIONALISATION (i18n)"
-echo "===================================="
-find lib -type d -name "l10n"
-find lib -type f -name "*.arb"
+print_tree_fallback() {
+  find "$ROOT" \
+    | grep -Ev "$IGNORE_REGEX" \
+    | sort \
+    | awk -v root="$ROOT" '
+      BEGIN { rootlen=length(root); }
+      {
+        path=$0
+        sub("^" root "/?", "", path)
+        if (path == "") { print root; next }
+        n=gsub("/", "/", path)
+        indent=""
+        for (i=0; i<n; i++) indent=indent "  "
+        print indent path
+      }'
+}
 
-echo ""
-echo "===================================="
-echo "🧩 FEATURES"
-echo "===================================="
-find lib/features -maxdepth 2 -type d
+print_paths_regex() {
+  local title="$1"
+  local regex="$2"
+  print_header "$title"
+  local out
+  out="$(find "$ROOT" -type f -regextype posix-extended -regex "$regex" 2>/dev/null \
+    | grep -Ev "$IGNORE_REGEX" | sort || true)"
+  if [[ -z "$out" ]]; then
+    echo "(rien trouvé)"
+  else
+    echo "$out"
+  fi
+}
 
-echo ""
-echo "===================================="
-echo "🧠 STATE / LOGIQUE UI"
-echo "===================================="
-find lib -type f \( -name "*state*.dart" -o -name "*form*.dart" -o -name "*bloc*.dart" -o -name "*cubit*.dart" \)
+print_dirs_regex() {
+  local title="$1"
+  local regex="$2"
+  print_header "$title"
+  local out
+  out="$(find "$ROOT" -type d -regextype posix-extended -regex "$regex" 2>/dev/null \
+    | grep -Ev "$IGNORE_REGEX" | sort || true)"
+  if [[ -z "$out" ]]; then
+    echo "(rien trouvé)"
+  else
+    echo "$out"
+  fi
+}
 
-echo ""
-echo "===================================="
-echo "🧱 WIDGETS RÉUTILISABLES"
-echo "===================================="
-find lib -type d -name "widgets"
+print_header "📁 STRUCTURE DU DOSSIER $ROOT/"
 
-echo ""
-echo "===================================="
-echo "📜 CONVENTIONS (noms des fichiers)"
-echo "===================================="
-find lib -type f | sed 's|.*/||' | sort | uniq -c | sort -nr | head -20
+if command -v tree >/dev/null 2>&1; then
+  tree -a "$ROOT" \
+    -I ".dart_tool|build|.git|*.g.dart|*.freezed.dart|*.gen.dart|*.mocks.dart"
+else
+  print_tree_fallback
+fi
 
-echo ""
-echo "===================================="
-echo "✅ FIN DE L’INSPECTION"
-echo "===================================="
+print_paths_regex "🚪 POINT D’ENTRÉE" ".*/main\\.dart$"
+print_paths_regex "🚪 APP ROOT" ".*/app\\.dart$"
+
+print_paths_regex "🧭 ROUTING (routes.dart)" ".*/routes\\.dart$"
+print_paths_regex "🧭 ROUTING (app_router.dart)" ".*/app_router\\.dart$"
+
+print_dirs_regex "🌍 INTERNATIONALISATION (i18n)" ".*/l10n$|.*/l10n/.*"
+print_dirs_regex "🎨 THEME" ".*/theme$|.*/theme/.*"
+
+print_dirs_regex "🧩 FEATURES" ".*/features$|.*/features/[^/]+$"
+print_dirs_regex "🧠 BUSINESS LOGIC" ".*/features/[^/]+/business_logic$|.*/features/[^/]+/business_logic/.*"
+print_dirs_regex "🗄️ DATA" ".*/features/[^/]+/data$|.*/features/[^/]+/data/.*"
+print_dirs_regex "🧱 PRESENTATION" ".*/features/[^/]+/presentation$|.*/features/[^/]+/presentation/.*"
+
+# ✅ Fichiers
+print_paths_regex "🧠 FICHIERS BLoC/Cubit" ".*/features/[^/]+/business_logic/(bloc|cubit)/.*\\.dart$|.*/features/[^/]+/business_logic/.*/(bloc|cubit)/.*\\.dart$"
+print_paths_regex "🗃️ REPOSITORIES" ".*/features/[^/]+/data/repositories/.*\\.dart$"
+print_paths_regex "🔌 SERVICES" ".*/features/[^/]+/data/services/.*\\.dart$"
+print_paths_regex "📦 MODELS (data/models)" ".*/features/[^/]+/data/models/.*\\.dart$"
+
+print_header "✅ FIN DE L’INSPECTION"
