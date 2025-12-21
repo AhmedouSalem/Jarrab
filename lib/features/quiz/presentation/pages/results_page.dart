@@ -39,72 +39,79 @@ class ResultsPage extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: maxWidth),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: hPad),
-              child: CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: ResultsAppBar(
-                      title: l10n.resultsTitle,
-                      onHomeTap: () {
-                        // Choix UX: retourner à Home (à adapter à tes routes)
-                        Navigator.of(context).pop();
-                      },
-                      onShareTap: () {
-                        // UI-only pour l’instant
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(l10n.resultsShareComingSoon)),
-                        );
-                      },
+        child: Material(
+          color: Theme.of(context).colorScheme.surfaceContainerLow,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: maxWidth),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: hPad),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: ResultsAppBar(
+                        title: l10n.resultsTitle,
+                        onHomeTap: () {
+                          // Choix UX: retourner à Home (à adapter à tes routes)
+                          Navigator.of(context).pop();
+                        },
+                        onShareTap: () {
+                          // UI-only pour l’instant
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(l10n.resultsShareComingSoon),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
 
-                  const SliverToBoxAdapter(child: SizedBox(height: 18)),
+                    const SliverToBoxAdapter(child: SizedBox(height: 18)),
 
-                  SliverToBoxAdapter(
-                    child: ResultsScoreCard(
-                      score: score,
-                      total: total,
-                      headline: l10n.resultsYourScore,
-                      message: l10n.resultsEncouragement,
+                    SliverToBoxAdapter(
+                      child: ResultsScoreCard(
+                        score: score,
+                        total: total,
+                        headline: l10n.resultsYourScore,
+                        message: l10n.resultsEncouragement,
+                      ),
                     ),
-                  ),
 
-                  const SliverToBoxAdapter(child: SizedBox(height: 16)),
+                    const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-                  SliverToBoxAdapter(
-                    child: ResultsPerformanceCard(
-                      title: l10n.resultsPerformanceOverview,
-                      correctLabel: l10n.resultsCorrectAnswers,
-                      incorrectLabel: l10n.resultsIncorrectAnswers,
-                      correct: correct,
-                      incorrect: incorrect,
+                    SliverToBoxAdapter(
+                      child: ResultsPerformanceCard(
+                        title: l10n.resultsPerformanceOverview,
+                        correctLabel: l10n.resultsCorrectAnswers,
+                        incorrectLabel: l10n.resultsIncorrectAnswers,
+                        correct: correct,
+                        incorrect: incorrect,
+                      ),
                     ),
-                  ),
 
-                  const SliverToBoxAdapter(child: SizedBox(height: 18)),
+                    const SliverToBoxAdapter(child: SizedBox(height: 18)),
 
-                  SliverToBoxAdapter(
-                    child: ResultsActions(
-                      primaryText: l10n.resultsRetryQuiz,
-                      secondaryText: l10n.resultsShareResults,
-                      onRetry: () {
-                        // UI-only: tu peux pop jusqu’au quiz ou relancer plus tard via bloc
-                        Navigator.of(context).pop();
-                      },
-                      onShare: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(l10n.resultsShareComingSoon)),
-                        );
-                      },
+                    SliverToBoxAdapter(
+                      child: ResultsActions(
+                        primaryText: l10n.resultsRetryQuiz,
+                        secondaryText: l10n.resultsShareResults,
+                        onRetry: () {
+                          // UI-only: tu peux pop jusqu’au quiz ou relancer plus tard via bloc
+                          Navigator.of(context).pop();
+                        },
+                        onShare: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(l10n.resultsShareComingSoon),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
 
-                  const SliverToBoxAdapter(child: SizedBox(height: 24)),
-                ],
+                    const SliverToBoxAdapter(child: SizedBox(height: 24)),
+                  ],
+                ),
               ),
             ),
           ),

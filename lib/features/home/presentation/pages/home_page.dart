@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jarrab/core/routing/app_router.dart';
+import 'package:jarrab/core/ui/responsive.dart';
 import 'package:jarrab/features/home/presentation/widgets/category_grid.dart';
 import 'package:jarrab/features/home/presentation/widgets/featured_quiz_carousel.dart';
 import 'package:jarrab/features/home/presentation/widgets/home_header.dart';
@@ -60,72 +61,81 @@ class HomePage extends StatelessWidget {
         questionsCount: 70,
       ),
     ];
-
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 12,
-              bottom: 6,
-              left: 12,
-              right: 12,
-            ),
-            child: HomeHeader(
-              title: l10n.homeTitle,
-              onNotificationTap: () {
-                // UI-only pour l’instant
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text(l10n.homeNotif)));
-              },
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 8,
-              bottom: 18,
-              left: 12,
-              right: 12,
-            ),
-            child: HomeSearchField(
-              hintText: l10n.homeSearchHint,
-              onChanged: (_) {},
+    final horizontalPadding = Responsive.pick<double>(
+      context,
+      compact: 16,
+      medium: 24,
+      expanded: 32,
+    );
+    return Material(
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 12,
+                bottom: 6,
+                left: horizontalPadding,
+                right: horizontalPadding,
+              ),
+              child: HomeHeader(
+                title: l10n.homeTitle,
+                onNotificationTap: () {
+                  // UI-only pour l’instant
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(l10n.homeNotif)));
+                },
+              ),
             ),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: FeaturedQuizCarousel(
-              title: l10n.homeFeaturedQuizzes,
-              items: featured,
-              onStartQuiz: (quiz) {
-                context.push(Routes.quizPath(quiz.quizId));
-                print("go to quiz page");
-              },
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 8,
+                bottom: 18,
+                left: horizontalPadding,
+                right: horizontalPadding,
+              ),
+              child: HomeSearchField(
+                hintText: l10n.homeSearchHint,
+                onChanged: (_) {},
+              ),
             ),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 18,
-              bottom: 10,
-              left: 12,
-              right: 12,
-            ),
-            child: Text(
-              l10n.homeExploreCategories,
-              style: Theme.of(context).textTheme.titleLarge,
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: FeaturedQuizCarousel(
+                title: l10n.homeFeaturedQuizzes,
+                items: featured,
+                onStartQuiz: (quiz) {
+                  context.push(Routes.quizPath(quiz.quizId));
+                  print("go to quiz page");
+                },
+                padding: horizontalPadding,
+              ),
             ),
           ),
-        ),
-        CategoryGrid(categories: categories),
-        const SliverToBoxAdapter(child: SizedBox(height: 16)),
-      ],
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 18,
+                bottom: 10,
+                left: horizontalPadding,
+                right: horizontalPadding,
+              ),
+              child: Text(
+                l10n.homeExploreCategories,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+          ),
+          CategoryGrid(categories: categories, padding: horizontalPadding),
+          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+        ],
+      ),
     );
   }
 }

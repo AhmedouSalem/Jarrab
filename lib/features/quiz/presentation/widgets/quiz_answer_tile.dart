@@ -21,7 +21,7 @@ class QuizAnswerTile extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.circular(14),
       color: selected
-          ? theme.colorScheme.primary.withOpacity(0.15)
+          ? theme.colorScheme.primary.withValues(alpha: 0.15)
           : theme.colorScheme.surface,
       child: InkWell(
         borderRadius: BorderRadius.circular(14),

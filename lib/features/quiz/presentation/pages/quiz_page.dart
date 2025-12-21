@@ -37,77 +37,86 @@ class QuizPage extends StatelessWidget {
     const selectedIndex = 2;
 
     final answers = ['Berlin', 'Madrid', 'Paris', 'Rome'];
+    final horizontalPadding = Responsive.pick<double>(
+      context,
+      compact: 16,
+      medium: 24,
+      expanded: 32,
+    );
+    return Container(
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    QuizHeader(
+                      title: l10n.quizQuestionProgress(current, total),
+                      onBack: () => context.pop(),
+                    ),
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraints.maxHeight),
-            child: IntrinsicHeight(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  QuizHeader(
-                    title: l10n.quizQuestionProgress(current, total),
-                    onBack: () => context.pop(),
-                  ),
+                    SizedBox(height: gapS),
 
-                  SizedBox(height: gapS),
+                    QuizProgressBar(progress: current / total),
 
-                  QuizProgressBar(progress: current / total),
+                    SizedBox(height: gapM),
 
-                  SizedBox(height: gapM),
+                    QuizQuestionCard(
+                      questionIndex: current,
+                      totalQuestions: total,
+                      question:
+                          'What is the capital of France, a city renowned for its art, culture, and iconic landmarks such as the Eiffel Tower and the Louvre Museum?',
+                      remainingSeconds: remainingSeconds,
+                    ),
 
-                  QuizQuestionCard(
-                    questionIndex: current,
-                    totalQuestions: total,
-                    question:
-                        'What is the capital of France, a city renowned for its art, culture, and iconic landmarks such as the Eiffel Tower and the Louvre Museum?',
-                    remainingSeconds: remainingSeconds,
-                  ),
+                    SizedBox(height: gapM),
 
-                  SizedBox(height: gapM),
-
-                  ...List.generate(
-                    answers.length,
-                    (i) => Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.shadow.withValues(alpha: 0.1),
-                            blurRadius: 14,
-                            offset: const Offset(0, 6),
-                          ),
-                        ],
-                      ),
-                      child: QuizAnswerTile(
-                        index: i,
-                        label: answers[i],
-                        selected: i == selectedIndex,
-                        onTap: () {},
+                    ...List.generate(
+                      answers.length,
+                      (i) => Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surface,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.shadow.withValues(alpha: 0.1),
+                              blurRadius: 14,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                        ),
+                        child: QuizAnswerTile(
+                          index: i,
+                          label: answers[i],
+                          selected: i == selectedIndex,
+                          onTap: () {},
+                        ),
                       ),
                     ),
-                  ),
 
-                  const Spacer(),
+                    const Spacer(),
 
-                  QuizNextButton(
-                    enabled: selectedIndex != -1,
-                    onPressed: () {
-                      context.pushReplacement(Routes.results, extra: {});
-                    },
-                  ),
-                ],
+                    QuizNextButton(
+                      enabled: selectedIndex != -1,
+                      onPressed: () {
+                        context.pushReplacement(Routes.results, extra: {});
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

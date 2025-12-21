@@ -51,7 +51,10 @@ GoRouter buildRouter(AuthSession session) {
         path: Routes.quiz,
         builder: (context, state) {
           final quizId = state.pathParameters['quizId']!;
-          return AppShellPage(child: QuizPage(quizId: quizId));
+          return AppShellPage(
+            useHorizontalPadding: false,
+            child: QuizPage(quizId: quizId),
+          );
         },
       ),
 
@@ -72,15 +75,24 @@ GoRouter buildRouter(AuthSession session) {
       ),
       GoRoute(
         path: Routes.leaderboard,
-        builder: (_, __) => const AppShellPage(child: LeaderboardPage()),
+        builder: (_, __) => const AppShellPage(
+          useHorizontalPadding: false,
+          child: LeaderboardPage(),
+        ),
       ),
       GoRoute(
         path: Routes.profile,
-        builder: (_, __) => const AppShellPage(child: ProfilePage()),
+        builder: (_, __) => const AppShellPage(
+          useHorizontalPadding: false,
+          child: ProfilePage(),
+        ),
       ),
       GoRoute(
         path: Routes.settings,
-        builder: (_, __) => const AppShellPage(child: SettingsPage()),
+        builder: (_, __) => const AppShellPage(
+          useHorizontalPadding: false,
+          child: SettingsPage(),
+        ),
       ),
     ],
     errorBuilder: (_, state) =>

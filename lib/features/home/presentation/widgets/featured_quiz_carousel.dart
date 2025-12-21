@@ -21,11 +21,13 @@ class FeaturedQuizCarousel extends StatelessWidget {
     required this.title,
     required this.items,
     required this.onStartQuiz,
+    required this.padding,
   });
 
   final String title;
   final List<FeaturedQuizUI> items;
   final ValueChanged<FeaturedQuizUI> onStartQuiz;
+  final double padding;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class FeaturedQuizCarousel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 12, right: 12),
+          padding: EdgeInsets.only(left: padding, right: padding),
           child: Text(title, style: Theme.of(context).textTheme.titleLarge),
         ),
         const SizedBox(height: 12),

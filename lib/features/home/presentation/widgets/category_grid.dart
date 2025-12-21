@@ -16,9 +16,14 @@ class CategoryUI {
 }
 
 class CategoryGrid extends StatelessWidget {
-  const CategoryGrid({super.key, required this.categories});
+  const CategoryGrid({
+    super.key,
+    required this.categories,
+    required this.padding,
+  });
 
   final List<CategoryUI> categories;
+  final double padding;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,7 @@ class CategoryGrid extends StatelessWidget {
     );
 
     return SliverPadding(
-      padding: const EdgeInsets.only(bottom: 8, left: 12, right: 12),
+      padding: EdgeInsets.only(bottom: 8, left: padding, right: padding),
       sliver: SliverGrid(
         delegate: SliverChildBuilderDelegate(
           (context, index) => CategoryCard(category: categories[index]),

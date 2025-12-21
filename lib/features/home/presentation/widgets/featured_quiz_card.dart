@@ -50,8 +50,8 @@ class FeaturedQuizCard extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      theme.colorScheme.surface.withOpacity(0.05),
-                      theme.colorScheme.surface.withOpacity(0.75),
+                      theme.colorScheme.surface.withValues(alpha: 0.05),
+                      theme.colorScheme.surface.withValues(alpha: 0.75),
                     ],
                   ),
                 ),
