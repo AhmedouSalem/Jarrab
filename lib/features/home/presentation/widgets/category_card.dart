@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jarrab/core/routing/routes.dart';
 import 'package:jarrab/l10n/app_localizations.dart';
 import 'category_grid.dart';
 
@@ -19,7 +21,9 @@ class CategoryCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(18),
       child: InkWell(
         borderRadius: BorderRadius.circular(18),
-        onTap: () {},
+        onTap: () {
+          context.push(Routes.quizByCategoryPath(category.id));
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

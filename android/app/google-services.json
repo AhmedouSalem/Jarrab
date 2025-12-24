@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "5074176598",
+    "project_id": "jerrab-84604",
+    "storage_bucket": "jerrab-84604.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5074176598:android:831c765f51f144a989c9f7",
+        "android_client_info": {
+          "package_name": "com.example.jarrab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5074176598-gp5gu3l996v2gmko0jjmh1fvjk5e14f8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzNsKyMrK9JCiK_RKRdSOspCSwqs6MYig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5074176598-gp5gu3l996v2gmko0jjmh1fvjk5e14f8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "5074176598-eb4pr0bo4jn1oua898oaa3fc9mvf6i81.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jarrab"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

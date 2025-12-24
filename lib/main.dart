@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:jarrab/core/di/injection.dart';
 import 'app.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // TODO: init Firebase here (Firebase.initializeApp)
+  await Injection.I.init();
 
-  runApp(App(router: router));
-
-  // TODO: brancher session à FirebaseAuth:
-  // FirebaseAuth.instance.authStateChanges().listen((user) {
-  //   session.setAuthenticated(user != null);
-  // });
+  runApp(App(router: Injection.I.router));
 }

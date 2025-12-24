@@ -1,11 +1,43 @@
 import 'package:flutter/material.dart';
+import '../bloc/leaderboard_bloc.dart';
+import '../bloc/leaderboard_event.dart';
 
 class LeaderboardPeriodToggle extends StatelessWidget {
-  const LeaderboardPeriodToggle({super.key});
+  const LeaderboardPeriodToggle({
+    super.key,
+    required this.value,
+    required this.onChanged,
+  });
+
+  final LeaderboardPeriod value;
+  final ValueChanged<LeaderboardPeriod> onChanged;
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+
+    Widget item(String text, bool selected, VoidCallback onTap) {
+      return Expanded(
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onTap,
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: selected ? cs.primaryContainer : cs.primary.withValues(alpha: 0.18),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              text,
+              style: TextStyle(
+                color: selected ? cs.onPrimaryContainer : cs.primary.withValues(alpha: 0.35),
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Container(
       height: 44,
@@ -14,49 +46,14 @@ class LeaderboardPeriodToggle extends StatelessWidget {
         color: cs.surface,
         borderRadius: BorderRadius.circular(14),
         boxShadow: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 10,
-            offset: Offset(0, 6),
-          ),
+          BoxShadow(color: Color(0x14000000), blurRadius: 10, offset: Offset(0, 6)),
         ],
       ),
       child: Row(
         children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: cs.primaryContainer,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                'Weekly',
-                style: TextStyle(
-                  color: cs.onPrimaryContainer,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
+          item('Weekly', value == LeaderboardPeriod.weekly, () => onChanged(LeaderboardPeriod.weekly)),
           const SizedBox(width: 6),
-          Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                // Un violet clair “inactif” (sans hardcode)
-                color: cs.primary.withValues(alpha: 0.18),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                'All-time',
-                style: TextStyle(
-                  color: cs.primary.withValues(alpha: 0.35),
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
+          item('All-time', value == LeaderboardPeriod.allTime, () => onChanged(LeaderboardPeriod.allTime)),
         ],
       ),
     );

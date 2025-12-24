@@ -5,11 +5,13 @@ import 'category_card.dart';
 
 class CategoryUI {
   const CategoryUI({
+    required this.id,
     required this.icon,
     required this.title,
     required this.questionsCount,
   });
 
+  final String id;
   final IconData icon;
   final String title;
   final int questionsCount;

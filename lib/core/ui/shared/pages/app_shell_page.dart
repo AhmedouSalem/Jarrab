@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jarrab/core/routing/app_router.dart';
+import 'package:jarrab/core/routing/routes.dart';
 import 'package:jarrab/core/ui/responsive.dart';
 import 'package:jarrab/core/ui/shared/widgets/app_bottom_nav_bar.dart';
 

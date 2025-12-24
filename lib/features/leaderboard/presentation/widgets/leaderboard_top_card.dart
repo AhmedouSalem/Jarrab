@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import '../../domain/entities/leaderboard_entry.dart';
 
 class LeaderboardTopCard extends StatelessWidget {
-  const LeaderboardTopCard({super.key});
+  const LeaderboardTopCard({
+    super.key,
+    required this.first,
+    required this.second,
+    required this.third,
+  });
+
+  final LeaderboardEntry? first;
+  final LeaderboardEntry? second;
+  final LeaderboardEntry? third;
+
+  String _fmt(int v) {
+    final s = v.toString();
+    return s.replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+(?!\d))'), (m) => '${m[1]},');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,47 +31,30 @@ class LeaderboardTopCard extends StatelessWidget {
           BoxShadow(
             color: cs.shadow.withValues(alpha: 0.10),
             blurRadius: 16,
-            offset: Offset(0, 10),
+            offset: const Offset(0, 10),
           ),
         ],
       ),
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.emoji_events_outlined, color: cs.primaryContainer),
-              const SizedBox(width: 6),
-              Text(
-                '1',
-                style: TextStyle(
-                  color: cs.primaryContainer,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
                 child: _PodiumUser(
                   rank: '2',
-                  name: 'Liam Smith',
-                  score: '11,800',
+                  name: second?.displayName ?? '',
+                  score: _fmt(second?.score ?? 0),
                   isCenter: false,
-                  avatarBg: cs.secondaryContainer.withValues(alpha: 0.45),
-                  iconColor: cs.primaryContainer,
+                  avatarBg: cs.surfaceContainerHighest,
+                  iconColor: cs.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: 10),
               Expanded(
                 child: _PodiumUser(
                   rank: '',
-                  name: 'Ava Johnson',
-                  score: '12,500',
+                  name: first?.displayName ?? '',
+                  score: _fmt(first?.score ?? 0),
                   isCenter: true,
                   avatarBg: cs.primary.withValues(alpha: 0.14),
                   iconColor: cs.primaryContainer,
@@ -66,11 +64,11 @@ class LeaderboardTopCard extends StatelessWidget {
               Expanded(
                 child: _PodiumUser(
                   rank: '3',
-                  name: '',
-                  score: '10,200',
+                  name: third?.displayName ?? '',
+                  score: _fmt(third?.score ?? 0),
                   isCenter: false,
                   avatarBg: cs.surfaceContainerHighest,
-                  iconColor: cs.primaryContainer,
+                  iconColor: cs.onSurfaceVariant,
                 ),
               ),
             ],
@@ -102,49 +100,37 @@ class _PodiumUser extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
 
-    final rankStyle = TextStyle(
-      color: cs.onSurface,
-      fontWeight: FontWeight.w800,
-      fontSize: isCenter ? 16 : 14,
-    );
-
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
-        if (rank.isNotEmpty) ...[
-          Text(rank, style: rankStyle),
-          const SizedBox(height: 6),
-        ] else
-          const SizedBox(height: 22),
+        if (rank.isNotEmpty)
+          Text(rank, style: TextStyle(color: cs.onSurfaceVariant, fontWeight: FontWeight.w800)),
+        if (rank.isNotEmpty) const SizedBox(height: 6),
 
-        CircleAvatar(
-          radius: isCenter ? 34 : 26,
-          backgroundColor: avatarBg,
+        Container(
+          width: isCenter ? 56 : 48,
+          height: isCenter ? 56 : 48,
+          decoration: BoxDecoration(
+            color: avatarBg,
+            shape: BoxShape.circle,
+          ),
           child: Icon(Icons.person, color: iconColor),
         ),
         const SizedBox(height: 10),
-
-        if (name.isNotEmpty)
-          Text(
-            name,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: cs.onSurface,
-              fontWeight: isCenter ? FontWeight.w800 : FontWeight.w600,
-              fontSize: isCenter ? 15 : 13,
-            ),
-          )
-        else
-          const SizedBox(height: 18),
-
-        const SizedBox(height: 6),
-
+        Text(
+          name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: cs.onSurface,
+          ),
+        ),
+        const SizedBox(height: 4),
         Text(
           score,
           style: TextStyle(
-            color: cs.primaryContainer,
             fontWeight: FontWeight.w800,
-            fontSize: isCenter ? 20 : 16,
+            color: cs.primaryContainer,
           ),
         ),
       ],
